@@ -1,0 +1,111 @@
+// !compileOnSave
+// compileOnSave: false
+
+///
+/// Primary Mixins File
+/// @author Dylan Burkey
+/// @since Version One
+/// @group Mixins
+/// @todo Add More Comments
+
+
+/// Responsive manager.
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+/// @example .foo {
+///  color: red;
+///
+///  @include respond-to('medium') {
+///    color: blue;
+///  }
+/// }
+@mixin respond-to($breakpoint) {
+  $raw-query: map-get($breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(type-of($raw-query) == 'string', unquote($raw-query), inspect($raw-query));
+
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '
+         + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+/// Fluid Text
+///
+/// The Fluid type mixin allows us to scale fonts correctly regardless of
+/// screen size. IE11 and all other mod
+///
+/// @author Dylan Burkey
+/// @access public
+/// @since Version One
+/// @todo REM font size mixin
+/// @group Mixins
+/// @alias Fonts
+/// @todo add REM mixin below!
+
+@mixin fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value) {
+  & {
+    @each $property in $properties {
+      #{$property}: $min-value;
+    }
+
+    @media screen and (min-width: $min-vw) {
+      @each $property in $properties {
+        #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+      }
+    }
+
+    @media screen and (min-width: $max-vw) {
+      @each $property in $properties {
+        #{$property}: $max-value;
+      }
+    }
+  }
+}
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+/* Single property */
+html {
+  @include fluid-type(font-size, 320px, 1366px, 14px, 24px);
+}
+
+/* Multiple properties with same values */
+h1 {
+  @include fluid-type(padding-bottom padding-top, 20em, 70em, 0.5em, 0.75em);
+}
+
+h2 {
+  @include fluid-type(padding-bottom padding-top, 20em, 70em, 0.75em, 0.65em);
+}
+
+.large-text {
+  @include fluid-type(font-size, 320px, 1336px, 16px, 13.5px);
+  @include fluid-type(padding-bottom padding-top, 20em, 70em, 0.75em, 1em);
+}
+
+.lincoln-container {
+  @include fluid-type(padding-bottom padding-top, 20em, 70em, 0.5em, 0.9em);
+}
+
+/// REM Font Size Mixin
+/// Calculates REM Value, Pixel Value and Line Height
+/// @author Dylan Burkey
+/// @group Mixins
+/// @alias Fonts
+/// @access Public
+
+@mixin font-size($font-size, $line-height:true){
+    font-size:$font-size;
+    font-size:($font-size / $base-font-size)*1rem;
+    @if $line-height == true{
+        line-height:ceil($font-size / $base-line-height) * ($base-line-height / $font-size);
+    }
+}

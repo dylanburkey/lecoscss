@@ -1,0 +1,24 @@
+// !compileOnSave
+// compileOnSave: false
+
+@import "fonts";
+
+.le-container {
+  position: relative;
+  float: none;
+  max-width: 100%;
+  box-sizing: border-box;
+  min-height: 60rem;
+  padding: 0 1rem;
+  background: firebrick;
+  color: #eee;
+}
+
+  .lincoln-nav {
+    list-style-type: none;
+    clear: both;
+    display: block;
+    padding: .375em 0;
+    @include fluid-type(font-size, 320px, 1366px, 18px, 15px);
+
+  }

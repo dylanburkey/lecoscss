@@ -1,0 +1,52 @@
+/* compileNested: css/$1.css*/
+$use-fonts: true !default;
+
+$base-font-size: 16px;
+$base-line-height: 24px;
+@import "mixins/mixins","shared/shared";
+
+
+.wrapper--mobile{
+  max-width: 40rem;
+  width: 20vm;
+  min-height: 40rem;
+  position: relative;
+  margin: 3em auto;
+  box-sizing: border-box;
+  padding: 0 2%;
+  font-size: 100%;
+  background: #ddd;
+  color: #333;
+  @if $use-fonts == false {
+    font-family: sans-serif;
+  } @else {
+    font-family: 'Open Sans', 'Ropa Sans', sans-serif;
+  }
+}
+
+.lincoln-container {
+  padding: 1.5rem;
+
+  p {
+    line-height: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+
+  .header--larger {
+    width: 100%;
+    overflow: auto;
+    text-align: center;
+    font-family: Helvetica;
+    color: #ddd;
+    background: firebrick;
+    position: absolute;
+    z-index: 7777;
+    top: 0;
+    left: 0;
+    width: 100%;
+      @include fluid-type(font-size, 320px, 1336px, 16px, 27px);
+      @include fluid-type(padding-bottom padding-top, 20em, 70em, 1.3em, 1.3em);
+
+  }

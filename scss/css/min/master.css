@@ -1,0 +1,52 @@
+.wrapper {
+  max-width: 60rem;
+  position: relative;
+  margin: auto;
+  box-sizing: border-box;
+  padding: 0 2%;
+  font-size: 100%;
+  line-height: 24px
+}
+.wrapper p {
+  font-size: 13px;
+  line-height: 26px
+}
+html {
+  font-size: 14px
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(14px + 4 * (100vw - 320px) / 1046)
+  }
+}
+@media screen and (min-width: 1366px) {
+  html {
+    font-size: 18px
+  }
+}
+h1 {
+  padding-bottom: 2em;
+  padding-top: 2em
+}
+@media screen and (min-width: 20em) {
+  h1 {
+    padding-bottom: calc(2em + 2 * (100vw - 20em) / 50);
+    padding-top: calc(2em + 2 * (100vw - 20em) / 50)
+  }
+}
+@media screen and (min-width: 70em) {
+  h1 {
+    padding-bottom: 4em;
+    padding-top: 4em
+  }
+}
+.wrapper {
+  background: firebrick;
+  color: #ddd;
+  max-width: 60rem;
+  box-sizing: border-box;
+  margin: auto;
+  height: 100%;
+  overflow-y: auto;
+  font-family: Helvetica, sans-serif
+}
